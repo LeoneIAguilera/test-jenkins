@@ -4,6 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                script{
+                    sh 'docker build -t mi-app-jenkins .'
+                }
                 echo 'Construyendo la aplicación...'
             }
         }
@@ -14,7 +17,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Desplegando la aplicación...'
+                script{
+                    sh 'docker run -d -p 3000:3000 --name mi-app-jenkins --link redis:redis mi-app-jenkins'
+                    echo 'Desplegando la aplicación...'
+                }
             }
         }
     }
