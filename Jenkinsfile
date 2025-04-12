@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                    sh 'docker run -d -p 3000:3000 --name mi-app-jenkins --link redis:redis mi-app-jenkins'
+                    sh 'docker run -d -p 3000:3000 --name mi-app-jenkins mi-app-jenkins'
                     echo 'Desplegando la aplicación...'
                 }
             }
